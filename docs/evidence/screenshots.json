@@ -1,0 +1,30 @@
+{
+  "report": "reports/report.html",
+  "gate_exit_code": 1,
+  "images": [
+    {
+      "file": "docs/evidence/report-coverage.png",
+      "from": "coverage-against-breach-size",
+      "to": "findings",
+      "height": 552
+    },
+    {
+      "file": "docs/evidence/report-findings.png",
+      "from": "findings",
+      "to": "undecidable",
+      "height": 334
+    },
+    {
+      "file": "docs/evidence/report-undecidable.png",
+      "from": "undecidable",
+      "to": "end",
+      "height": 172
+    }
+  ],
+  "badge": {
+    "text": "BREACH",
+    "colour": "rgb(180, 35, 24)",
+    "background": "rgb(253, 232, 230)",
+    "visible": true
+  }
+}

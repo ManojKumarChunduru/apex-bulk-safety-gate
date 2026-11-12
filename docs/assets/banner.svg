@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" role="img" aria-label="apex-bulk-safety-gate: coverage counts lines, a governor limit counts records">
+  <title>apex-bulk-safety-gate</title>
+  <style>
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+    .sans { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
+    .title { font-size: 40px; font-weight: 700; fill: #f3f6fb; letter-spacing: -0.5px; }
+    .claim { font-size: 20px; fill: #c7d0dd; }
+    .axis { font-size: 13px; fill: #8c98a8; }
+    .figure { font-size: 17px; fill: #f3f6fb; font-weight: 600; }
+    .figure-sub { font-size: 13px; fill: #8c98a8; }
+    .fade { opacity: 0; animation: fadein 0.9s ease-out forwards; }
+    .fade.d1 { animation-delay: 1.9s; }
+    .fade.d2 { animation-delay: 2.5s; }
+    .fade.d3 { animation-delay: 3.1s; }
+    .fade.d4 { animation-delay: 3.7s; }
+    @keyframes fadein { to { opacity: 1; } }
+    @keyframes drift { 0% { stop-color: #1b2a41; } 50% { stop-color: #223a5e; } 100% { stop-color: #1b2a41; } }
+    .drift { animation: drift 9s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) {
+      .fade { opacity: 1; animation: none; }
+      .drift { animation: none; }
+      #fill { width: 480px; }
+      #tick, #tested, #breach-label { opacity: 1; }
+    }
+  </style>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1b2a41" class="drift"/>
+      <stop offset="1" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2dd4a4"/>
+      <stop offset="1" stop-color="#7dd3fc"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="320" fill="url(#bg)"/>
+  <text x="56" y="76" class="mono title">apex-bulk-safety-gate</text>
+  <text x="56" y="112" class="sans claim">Coverage counts lines; a governor limit counts records. The gate computes where each trigger breaches.</text>
+
+  <!-- the axis: records in one trigger invocation, 0 to 200 -->
+  <g transform="translate(56, 150)">
+    <text x="0" y="0" class="sans axis">records in one save</text>
+    <text x="0" y="48" class="sans axis">0</text>
+    <text x="946" y="48" class="sans axis" text-anchor="end">200</text>
+    <rect x="0" y="18" width="960" height="14" rx="7" fill="#243247"/>
+    <rect id="fill" x="0" y="18" width="0" height="14" rx="7" fill="url(#bar)">
+      <animate attributeName="width" from="0" to="480" dur="1.6s" begin="0.3s" fill="freeze" calcMode="spline" keySplines="0.2 0 0.2 1"/>
+    </rect>
+    <g id="tested" opacity="0">
+      <line x1="480" y1="8" x2="480" y2="42" stroke="#2dd4a4" stroke-width="2"/>
+      <text x="480" y="62" class="sans figure-sub" text-anchor="middle" fill="#2dd4a4">tests stop at 100</text>
+      <animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="1.9s" fill="freeze"/>
+    </g>
+    <g id="tick" opacity="0">
+      <line x1="485" y1="8" x2="485" y2="42" stroke="#ff6b6b" stroke-width="3"/>
+      <animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="2.3s" fill="freeze"/>
+    </g>
+    <text id="breach-label" x="500" y="12" class="sans figure-sub" fill="#ff6b6b" opacity="0">breach at the 101st record
+      <animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="2.3s" fill="freeze"/>
+    </text>
+  </g>
+
+  <!-- the three figures -->
+  <g transform="translate(56, 262)">
+    <text x="0" y="0" class="sans figure fade d1">4 of 11 fully covered triggers breach</text>
+    <text x="0" y="28" class="sans figure-sub fade d1">their tests stop at 100 records</text>
+    <text x="400" y="0" class="sans figure fade d2">2 more above 200 records</text>
+    <text x="400" y="28" class="sans figure-sub fade d2">correctly bulkified, inside one Bulk API batch</text>
+    <text x="800" y="0" class="sans figure fade d3">3 undecidable</text>
+    <text x="800" y="28" class="sans figure-sub fade d3">reported first, never costed as zero</text>
+  </g>
+</svg>

@@ -1,0 +1,8 @@
+{
+  "source": "README.md fence mermaid-source",
+  "renderer": "playwright+mermaid.min.js",
+  "width": 2203,
+  "height": 283,
+  "htmlLabels": false,
+  "foreignObject": false
+}

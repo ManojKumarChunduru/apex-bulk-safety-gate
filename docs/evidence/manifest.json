@@ -7,18 +7,18 @@
   "gif": {
     "fps": 6,
     "width": 800,
-    "colours": 48,
-    "bytes": 4717029
+    "colours": 32,
+    "bytes": 4412054
   },
   "mp4": {
-    "bytes": 573727
+    "bytes": 653328
   },
   "segments": [
     {
       "title": "the policy the gate compares against",
       "command": "absg limits",
       "exit_code": 0,
-      "wall_seconds": 0.071,
+      "wall_seconds": 0.059,
       "stdout_lines": 7,
       "stderr_lines": 0
     },
@@ -26,7 +26,7 @@
       "title": "the verdict at 200 records, next to coverage and the largest tested size",
       "command": "absg gate --project fixture --coverage fixture/coverage/test-result-codecoverage.json",
       "exit_code": 1,
-      "wall_seconds": 0.143,
+      "wall_seconds": 0.163,
       "stdout_lines": 29,
       "stderr_lines": 0
     },
@@ -34,7 +34,7 @@
       "title": "the closest miss: tested at 100, breaches at 101, through a chain",
       "command": "absg explain AccountTaskTrigger --project fixture",
       "exit_code": 0,
-      "wall_seconds": 0.164,
+      "wall_seconds": 0.211,
       "stdout_lines": 23,
       "stderr_lines": 0
     },
@@ -42,7 +42,7 @@
       "title": "the same project at one Bulk API batch: bulkified triggers breach too",
       "command": "absg gate --project fixture --records 10000",
       "exit_code": 1,
-      "wall_seconds": 0.17,
+      "wall_seconds": 0.148,
       "stdout_lines": 29,
       "stderr_lines": 0
     },
@@ -50,7 +50,7 @@
       "title": "every figure in the documents is re-measured",
       "command": "python tools/check_numbers.py",
       "exit_code": 0,
-      "wall_seconds": 0.069,
+      "wall_seconds": 0.061,
       "stdout_lines": 1,
       "stderr_lines": 0
     }

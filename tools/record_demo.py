@@ -36,7 +36,7 @@ SEGMENTS = [
     ),
     ("every figure in the documents is re-measured", ["python", "tools/check_numbers.py"]),
 ]
-WIDTH, HEIGHT, FPS, GIF_WIDTH, COLOURS = 960, 600, 6, 800, 48
+WIDTH, HEIGHT, FPS, GIF_WIDTH, COLOURS = 960, 600, 6, 800, 32
 
 
 def run_segment(argv: list[str]) -> dict:

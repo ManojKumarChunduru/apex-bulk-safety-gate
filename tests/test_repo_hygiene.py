@@ -94,7 +94,7 @@ def test_every_github_url_names_this_repository_exactly():
         except UnicodeDecodeError:
             continue
         for match in pattern.findall(text):
-            if match.rstrip(".") != REPO:
+            if match.rstrip(".").removesuffix(".git") != REPO:
                 offenders.append((path.relative_to(ROOT).as_posix(), match))
     assert offenders == []
 

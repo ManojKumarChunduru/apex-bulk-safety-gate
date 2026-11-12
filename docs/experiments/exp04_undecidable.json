@@ -1,0 +1,52 @@
+{
+  "ground_truth": {
+    "expected_findings": 7,
+    "false_negative": 0,
+    "false_positive": 0,
+    "note": "The fixture was written by the gate's author, so agreement with its own ground truth is a check on arithmetic and parsing, not on what the gate would find in code it has never seen. A measured zero false positives is 'below one in 7', not zero.",
+    "observed_findings": 7,
+    "precision_pct": 100.0,
+    "recall_pct": 100.0,
+    "refusal_matches": 13,
+    "resolution_floor_findings": "1 in 7",
+    "resolution_floor_triggers": "1 in 13",
+    "status_matches": 13,
+    "true_positive": 7
+  },
+  "reasons": {
+    "dynamic_dispatch": 1,
+    "external_namespace": 1,
+    "reentrant": 1
+  },
+  "refusals": [
+    {
+      "construct": "update Case re-enters CaseAgeTrigger with no static guard",
+      "line": 8,
+      "path": "force-app/main/default/triggers/CaseAgeTrigger.trigger",
+      "reason": "reentrant",
+      "trigger": "CaseAgeTrigger"
+    },
+    {
+      "construct": "Type.forName(...)",
+      "line": 5,
+      "path": "force-app/main/default/triggers/LeadRoutingTrigger.trigger",
+      "reason": "dynamic_dispatch",
+      "trigger": "LeadRoutingTrigger"
+    },
+    {
+      "construct": "erp.SyncHandler.push()",
+      "line": 3,
+      "path": "force-app/main/default/triggers/OpportunitySyncTrigger.trigger",
+      "reason": "external_namespace",
+      "trigger": "OpportunitySyncTrigger"
+    }
+  ],
+  "triggers_total": 13,
+  "undecidable": 3,
+  "undecidable_names": [
+    "CaseAgeTrigger",
+    "LeadRoutingTrigger",
+    "OpportunitySyncTrigger"
+  ],
+  "undecidable_pct": 23.1
+}

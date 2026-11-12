@@ -1,0 +1,63 @@
+{
+  "apex_test_methods": 12,
+  "apex_test_methods_at_200_or_more": 2,
+  "apex_test_methods_at_200_or_more_names": [
+    "CaseTriggersTest.escalatesTwoHundredCases",
+    "ContactTriggersTest.formatsPhonesInBulk"
+  ],
+  "apex_test_methods_single_record": 8,
+  "apex_test_methods_single_record_names": [
+    "AccountTriggersTest.insertsOneAccount",
+    "AccountTriggersTest.updatesRegionOnce",
+    "CaseTriggersTest.agesOneCaseOnUpdate",
+    "ContactTriggersTest.opensCaseWhenEmailChanges",
+    "LeadTriggerTest.routesOneLead",
+    "OpportunityTriggersTest.recalculatesOnStageChange",
+    "OrderTriggersTest.countsOpenLinesOnUpdate",
+    "TaskTriggerTest.escalatesToManagerOnInsert"
+  ],
+  "crosstab": {
+    "100%": {
+      "breach": 4,
+      "clean": 4,
+      "latent": 1,
+      "undecidable": 2
+    },
+    "75 to 99%": {
+      "latent": 1,
+      "undecidable": 1
+    }
+  },
+  "fully_covered": 11,
+  "fully_covered_breaching": 4,
+  "fully_covered_breaching_names": [
+    "AccountTaskTrigger",
+    "ContactEmailTrigger",
+    "OpportunityStageTrigger",
+    "TaskAssignmentTrigger"
+  ],
+  "fully_covered_breaching_pct": 36.4,
+  "fully_covered_breaching_tested": {
+    "AccountTaskTrigger": 100,
+    "ContactEmailTrigger": 1,
+    "OpportunityStageTrigger": 1,
+    "TaskAssignmentTrigger": 1
+  },
+  "fully_covered_undecidable": 2,
+  "largest_test_behind_a_breach": 100,
+  "per_method_largest": {
+    "AccountTriggersTest.insertsOneAccount": 1,
+    "AccountTriggersTest.insertsOneHundredAccounts": 100,
+    "AccountTriggersTest.updatesRegionOnce": 1,
+    "CaseTriggersTest.agesOneCaseOnUpdate": 1,
+    "CaseTriggersTest.escalatesTwoHundredCases": 200,
+    "ContactTriggersTest.formatsPhonesInBulk": 251,
+    "ContactTriggersTest.opensCaseWhenEmailChanges": 1,
+    "LeadTriggerTest.routesOneLead": 1,
+    "OpportunityTriggersTest.recalculatesOnStageChange": 1,
+    "OrderTriggersTest.countsOpenLinesOnUpdate": 1,
+    "OrderTriggersTest.rollsUpLinesFromStaticResource": 50,
+    "TaskTriggerTest.escalatesToManagerOnInsert": 1
+  },
+  "records": 200
+}

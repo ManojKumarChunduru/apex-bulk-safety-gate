@@ -1,0 +1,85 @@
+{
+  "breaches_above_records": 2,
+  "breaches_at_records": 5,
+  "by_limit": {
+    "dml_statements": 1,
+    "soql_queries": 6
+  },
+  "by_provenance": {
+    "per invocation": 2,
+    "per record": 5
+  },
+  "chain_only": 2,
+  "findings": [
+    {
+      "breach_at": 101,
+      "cost": "r",
+      "limit": "soql_queries",
+      "provenance": "per record",
+      "trigger": "AccountTaskTrigger",
+      "via_chain": true
+    },
+    {
+      "breach_at": 101,
+      "cost": "r",
+      "limit": "soql_queries",
+      "provenance": "per record",
+      "trigger": "ContactEmailTrigger",
+      "via_chain": true
+    },
+    {
+      "breach_at": 151,
+      "cost": "r",
+      "limit": "dml_statements",
+      "provenance": "per record",
+      "trigger": "ContactEmailTrigger",
+      "via_chain": false
+    },
+    {
+      "breach_at": 101,
+      "cost": "r",
+      "limit": "soql_queries",
+      "provenance": "per record",
+      "trigger": "OpportunityStageTrigger",
+      "via_chain": false
+    },
+    {
+      "breach_at": 5001,
+      "cost": "4",
+      "limit": "soql_queries",
+      "provenance": "per invocation",
+      "trigger": "OrderLineRollupTrigger",
+      "via_chain": true
+    },
+    {
+      "breach_at": 6601,
+      "cost": "3",
+      "limit": "soql_queries",
+      "provenance": "per invocation",
+      "trigger": "OrderTotalTrigger",
+      "via_chain": false
+    },
+    {
+      "breach_at": 101,
+      "cost": "r",
+      "limit": "soql_queries",
+      "provenance": "per record",
+      "trigger": "TaskAssignmentTrigger",
+      "via_chain": false
+    }
+  ],
+  "findings_total": 7,
+  "horizon": 10000,
+  "objects_total": 8,
+  "records": 200,
+  "status_counts": {
+    "breach": 4,
+    "clean": 4,
+    "latent": 2,
+    "undecidable": 3
+  },
+  "triggers_breaching_at_records": 4,
+  "triggers_breaching_pct": 30.8,
+  "triggers_total": 13,
+  "via_chain": 3
+}

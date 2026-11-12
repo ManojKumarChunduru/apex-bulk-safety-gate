@@ -1,0 +1,99 @@
+{
+  "breaches_above_200": 2,
+  "breaches_above_200_names": [
+    "OrderLineRollupTrigger",
+    "OrderTotalTrigger"
+  ],
+  "breaches_reached_by_200": 5,
+  "breaches_total": 7,
+  "closest_miss": {
+    "breach_at": 101,
+    "limit": "soql_queries",
+    "ratio": 1.0,
+    "reached_by_200_record_test": true,
+    "records_a_test_would_need": 101,
+    "records_short": 1,
+    "tested_largest": 100,
+    "trigger": "AccountTaskTrigger"
+  },
+  "horizon": 10000,
+  "largest_breach": 6601,
+  "largest_tested_any_trigger": 251,
+  "records": 200,
+  "records_short_max": 6600,
+  "records_short_min": 1,
+  "resolution_floor_note": "A clean verdict from a test at N records is a claim about N records. The gate's own recommended 200-record test has the same floor: a breach above 200 is invisible to it, and the table says how many records each one would take.",
+  "rows": [
+    {
+      "breach_at": 101,
+      "limit": "soql_queries",
+      "ratio": 1.0,
+      "reached_by_200_record_test": true,
+      "records_a_test_would_need": 101,
+      "records_short": 1,
+      "tested_largest": 100,
+      "trigger": "AccountTaskTrigger"
+    },
+    {
+      "breach_at": 101,
+      "limit": "soql_queries",
+      "ratio": 101.0,
+      "reached_by_200_record_test": true,
+      "records_a_test_would_need": 101,
+      "records_short": 100,
+      "tested_largest": 1,
+      "trigger": "ContactEmailTrigger"
+    },
+    {
+      "breach_at": 151,
+      "limit": "dml_statements",
+      "ratio": 151.0,
+      "reached_by_200_record_test": true,
+      "records_a_test_would_need": 151,
+      "records_short": 150,
+      "tested_largest": 1,
+      "trigger": "ContactEmailTrigger"
+    },
+    {
+      "breach_at": 101,
+      "limit": "soql_queries",
+      "ratio": 101.0,
+      "reached_by_200_record_test": true,
+      "records_a_test_would_need": 101,
+      "records_short": 100,
+      "tested_largest": 1,
+      "trigger": "OpportunityStageTrigger"
+    },
+    {
+      "breach_at": 5001,
+      "limit": "soql_queries",
+      "ratio": 100.0,
+      "reached_by_200_record_test": false,
+      "records_a_test_would_need": 5001,
+      "records_short": 4951,
+      "tested_largest": 50,
+      "trigger": "OrderLineRollupTrigger"
+    },
+    {
+      "breach_at": 6601,
+      "limit": "soql_queries",
+      "ratio": 6601.0,
+      "reached_by_200_record_test": false,
+      "records_a_test_would_need": 6601,
+      "records_short": 6600,
+      "tested_largest": 1,
+      "trigger": "OrderTotalTrigger"
+    },
+    {
+      "breach_at": 101,
+      "limit": "soql_queries",
+      "ratio": 101.0,
+      "reached_by_200_record_test": true,
+      "records_a_test_would_need": 101,
+      "records_short": 100,
+      "tested_largest": 1,
+      "trigger": "TaskAssignmentTrigger"
+    }
+  ],
+  "smallest_breach_above_200": 5001
+}

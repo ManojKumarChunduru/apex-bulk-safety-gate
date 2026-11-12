@@ -66,7 +66,9 @@ class TriggerVerdict:
     coverage_pct: float | None
     tested: TestedSize
     findings: list[Finding]  # one per limit with a breach size within the horizon
-    costs: dict[str, str]  # limit -> formula
+    costs: dict[str, str]  # limit -> total formula, own plus chain
+    own_costs: dict[str, str]  # limit -> formula for this trigger's own sites
+    chain_costs: dict[str, str]  # limit -> formula for what its DML invokes
     refusals: list[dict]
     sites: list[dict]
     guards: list[str]
@@ -93,6 +95,8 @@ class TriggerVerdict:
             "smallest_breach": self.smallest_breach(),
             "findings": [f.to_dict() for f in self.findings],
             "costs": self.costs,
+            "own_costs": self.own_costs,
+            "chain_costs": self.chain_costs,
             "refusals": self.refusals,
             "guards": self.guards,
             "sites": self.sites,
@@ -206,6 +210,8 @@ def run_gate(
                 tested=sizes[name],
                 findings=findings,
                 costs=formulas,
+                own_costs={k: v.describe() for k, v in cost.own.limit_polys().items()},
+                chain_costs={k: cost.chain_part(k).describe() for k in LIMIT_ORDER},
                 refusals=[r.to_dict() for r in cost.refusals],
                 sites=[s.to_dict() for s in cost.sites],
                 guards=sorted(cost.own.guards),

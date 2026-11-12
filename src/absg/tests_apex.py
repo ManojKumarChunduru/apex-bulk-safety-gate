@@ -100,7 +100,7 @@ def read_exercises(project: Project) -> list[Exercise]:
     return exercises
 
 
-def tested_sizes(
+def sizes_by_trigger(
     project: Project, exercises: list[Exercise] | None = None
 ) -> dict[str, TestedSize]:
     exercises = read_exercises(project) if exercises is None else exercises

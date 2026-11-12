@@ -17,7 +17,7 @@ from absg.coverage import CoverageEntry
 from absg.exit_codes import BREACH, CLEAN, UNDECIDABLE
 from absg.limits import Policy, breach_size, cost_at
 from absg.project import Project
-from absg.tests_apex import TestedSize, tested_sizes
+from absg.tests_apex import TestedSize, sizes_by_trigger
 
 LIMIT_ORDER = ("soql_queries", "sosl_queries", "dml_statements", "dml_rows")
 
@@ -37,10 +37,6 @@ class Finding:
     tested_largest: int | None
     tested_unknown: int
     coverage_pct: float | None
-
-    @property
-    def breaches_at_records(self) -> bool:
-        return self.breach_at is not None
 
     def to_dict(self) -> dict:
         return {
@@ -181,7 +177,7 @@ def run_gate(
     project: Project, policy: Policy, coverage: dict[str, CoverageEntry] | None
 ) -> GateResult:
     resolver = ChainResolver(project)
-    sizes = tested_sizes(project)
+    sizes = sizes_by_trigger(project)
     verdicts: list[TriggerVerdict] = []
     warnings: list[str] = []
     for name in sorted(project.triggers):

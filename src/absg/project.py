@@ -67,6 +67,11 @@ def package_directories(root: Path) -> list[Path]:
     return paths
 
 
+def _describe(relative: str, exc: Exception) -> str:
+    message = str(exc)
+    return message if message.startswith(relative) else f"{relative}: {message}"
+
+
 def load_project(root: str | Path) -> Project:
     root = Path(root)
     project = Project(root)
@@ -80,14 +85,14 @@ def load_project(root: str | Path) -> Project:
             try:
                 decl = parse_trigger(path.read_text(encoding="utf-8"), project.relative(path))
             except (ApexSyntaxError, OSError, UnicodeDecodeError) as exc:
-                project.load_errors.append(f"{project.relative(path)}: {exc}")
+                project.load_errors.append(_describe(project.relative(path), exc))
                 continue
             project.triggers[decl.name] = decl
         for path in sorted(directory.rglob("*.cls")):
             try:
                 decl = parse_class(path.read_text(encoding="utf-8"), project.relative(path))
             except (ApexSyntaxError, OSError, UnicodeDecodeError) as exc:
-                project.load_errors.append(f"{project.relative(path)}: {exc}")
+                project.load_errors.append(_describe(project.relative(path), exc))
                 continue
             project.classes[decl.name] = decl
         for path in sorted(directory.rglob("staticresources/*.csv")):

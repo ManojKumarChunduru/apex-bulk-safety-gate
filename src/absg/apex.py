@@ -44,7 +44,9 @@ class Token:
     line: int
 
     def is_ident(self, *names: str) -> bool:
-        return self.kind == "ident" and (not names or self.text.lower() in names)
+        return self.kind == "ident" and (
+            not names or self.text.lower() in {n.lower() for n in names}
+        )
 
     def is_punct(self, *texts: str) -> bool:
         return self.kind == "punct" and (not texts or self.text in texts)

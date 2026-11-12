@@ -32,11 +32,14 @@ select = ["E", "F", "W", "I", "B", "UP"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+python_functions = "test_*"
 addopts = "-q"
 
 [tool.coverage.run]
 source = ["absg"]
 branch = false
+# __main__ is exercised through a subprocess in the suite, which coverage does not trace.
+omit = ["*/__main__.py"]
 
 [tool.coverage.report]
 show_missing = true

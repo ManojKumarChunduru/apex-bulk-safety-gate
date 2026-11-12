@@ -10,6 +10,7 @@ chains it cannot follow become refusals, and a trigger with a refusal is undecid
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass, field
 
 from absg.apex import (
@@ -88,6 +89,23 @@ DATABASE_DML = {
     ("eventbus", "publish"): "publish",
 }
 GROWERS = {"add", "addall", "put", "putall"}
+
+# Types a DML statement cannot target. Anything else is taken to be an sObject or a project class.
+PRIMITIVES = {
+    "integer",
+    "long",
+    "double",
+    "decimal",
+    "string",
+    "boolean",
+    "id",
+    "date",
+    "datetime",
+    "time",
+    "blob",
+    "object",
+    "sobject",
+}
 
 # Standard objects a trigger fixture is likely to touch as `Object.sObjectType` or similar.
 STANDARD_OBJECTS = {
@@ -437,6 +455,11 @@ class Analyzer:
                 if len(expr) == 1 and expr[0].kind == "number" and expr[0].text.isdigit():
                     n = int(expr[0].text) + (1 if t.text == "<=" else 0)
                     return Provenance.const(n, "literal bound")
+                if len(expr) == 1 and expr[0].is_ident():
+                    prov = self.provenance_of(expr, env)
+                    if prov.kind in {"record", "const"}:
+                        return prov
+                    return Provenance.unbounded(f"loop bound {expr[0].text} is not bounded")
                 if len(expr) >= 4 and expr[-1].is_punct(")") and expr[-3].is_ident("size"):
                     receiver = expr[:-4] if expr[-4].is_punct(".") else expr[:-3]
                     return self.provenance_of(receiver, env)
@@ -788,6 +811,9 @@ class Analyzer:
     def _dml_target(self, target: list[Token], env: Env) -> tuple[str | None, Poly | None]:
         if not target:
             return None, None
+        if target[0].kind == "soql":
+            match = re.search(r"\bFROM\s+([A-Za-z_][A-Za-z0-9_]*)", target[0].text, re.IGNORECASE)
+            return (match.group(1) if match else None), None
         if target[0].is_ident("new"):
             type_name, j = read_type(target, 1)
             if type_name is None:
@@ -804,7 +830,7 @@ class Analyzer:
             if name in env:
                 type_name, prov = env[name]
                 sobject = type_name.sobject if type_name else None
-                if sobject is None:
+                if sobject is None or sobject.lower() in PRIMITIVES:
                     return None, None
                 if type_name is not None and not type_name.is_collection:
                     return sobject, Poly.const(1)
@@ -850,7 +876,7 @@ class Analyzer:
         if expr[0].is_punct("(") and len(expr) > 2:
             close = matching_close(expr, 0)
             inner = expr[1:close]
-            if len(inner) in (1, 3) and all(t.is_ident() or t.is_punct(".") for t in inner):
+            if inner and all(t.is_ident() or t.is_punct(".", "<", ">", ",") for t in inner):
                 return self.provenance_of(expr[close + 1 :], env)
         if expr[0].kind in {"soql", "sosl"}:
             return Provenance.unbounded("query result")

@@ -11,7 +11,6 @@ count of one trigger invocation, so a nested per-record loop is r squared rather
 from __future__ import annotations
 
 from dataclasses import dataclass
-from fractions import Fraction
 
 
 @dataclass(frozen=True)
@@ -138,7 +137,3 @@ class Provenance:
         kind = "record" if new_size.degree >= 1 else "const"
         note = "grown inside a per-record loop" if by.degree >= 1 else "grown by a constant"
         return Provenance(kind, new_size, note)
-
-
-def ratio(numerator: int, denominator: int) -> Fraction:
-    return Fraction(numerator, denominator)

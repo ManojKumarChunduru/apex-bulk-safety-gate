@@ -126,6 +126,20 @@
     "objects_total": [
       "over {} objects"
     ],
+    "orderlinerollup_breach_chunk": [
+      "the {}th chunk of a chain"
+    ],
+    "orderlinerollup_per_invocation": [
+      "{} queries per invocation, breaching at {m:find_orderlinerollup_soql_queries_breach}",
+      "{} queries per invocation via chain"
+    ],
+    "ordertotal_breach_chunk": [
+      "at the {}th chunk"
+    ],
+    "ordertotal_per_invocation": [
+      "{} queries per invocation exceed",
+      "costs {} queries per invocation and is clean"
+    ],
     "planted_breaches": [
       "{} planted breaches",
       "below one in {}"
@@ -326,6 +340,10 @@
     "limit_soql_async": 200,
     "limit_sosl": 20,
     "objects_total": 8,
+    "orderlinerollup_breach_chunk": 26,
+    "orderlinerollup_per_invocation": 4,
+    "ordertotal_breach_chunk": 34,
+    "ordertotal_per_invocation": 3,
     "planted_breaches": 7,
     "records": 200,
     "refusal_reasons": 3,

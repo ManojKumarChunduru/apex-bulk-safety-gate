@@ -234,6 +234,25 @@ def main() -> int:
         metrics[f"find_{key}_short"] = row["records_short"]
         anchors[f"find_{key}_short"] = [f"{prefix} {{m:find_{key}_breach}} | {{}} |"]
 
+    # The two constant-cost triggers: their per-invocation cost and the chunk that breaches.
+    for name, key in (
+        ("OrderTotalTrigger", "ordertotal"),
+        ("OrderLineRollupTrigger", "orderlinerollup"),
+    ):
+        finding = [f for f in result.by_name(name).findings if f.limit == "soql_queries"][0]
+        metrics[f"{key}_per_invocation"] = finding.per_invocation
+        metrics[f"{key}_breach_chunk"] = -(-finding.breach_at // policy.chunk_size)
+    anchors["ordertotal_per_invocation"] = [
+        "{} queries per invocation exceed",
+        "costs {} queries per invocation and is clean",
+    ]
+    anchors["ordertotal_breach_chunk"] = ["at the {}th chunk"]
+    anchors["orderlinerollup_per_invocation"] = [
+        "{} queries per invocation, breaching at {m:find_orderlinerollup_soql_queries_breach}",
+        "{} queries per invocation via chain",
+    ]
+    anchors["orderlinerollup_breach_chunk"] = ["the {}th chunk of a chain"]
+
     payload = {
         "metrics": metrics,
         "anchors": anchors,

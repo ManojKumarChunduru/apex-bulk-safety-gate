@@ -29,7 +29,8 @@ a chain.
 1. The constant-cost breach. `OrderTotalTrigger` costs 3 queries per invocation and is clean at
    200. At the 34th chunk the shared transaction has issued more than 100 queries, so it breaches
    at 6,601 records, inside one Bulk API batch. `OrderLineRollupTrigger` is the same shape through
-   a chain, 4 queries per invocation, breaching at 5,001. Both are correctly bulkified. A boolean
+   a chain, 4 queries per invocation, breaching at 5,001, the 26th chunk of a chain of two
+   triggers. Both are correctly bulkified. A boolean
    calls both clean and a Data Loader job proves it wrong.
 2. The resolution of the tests. "Clean at 200" says nothing about which record count the tests
    reached. `AccountTaskTrigger` is tested at 100 records and breaches at 101; the test passes

@@ -9,8 +9,9 @@ beside it rather than by its bare digits. Three checks run:
 2. Staleness: any occurrence of an anchor's wording with a different number is a stale claim.
 3. The banner's text nodes carry the headline figures and are checked the same way.
 
-Then a reverse scan lists the numbers in the README that no metric accounts for, with code
-spans, fences, URLs and HTML attributes excluded, so a figure nothing re-measures is visible.
+Then a reverse scan lists the numbers in every checked document that no metric accounts for,
+with code spans, fences, URLs and HTML attributes excluded, so a figure nothing re-measures is
+visible.
 """
 
 from __future__ import annotations
@@ -162,11 +163,11 @@ def main() -> int:
 
     known = {normalise(v) for value in metrics.values() for v in variants(value)}
     unanchored = []
-    readme = documents.get("README.md", "")
-    for line_number, line in enumerate(strip_code(readme).splitlines(), start=1):
-        for number in re.findall(r"(?<![\w.-])\d[\d,]*(?:\.\d+)?(?![\w.])", line):
-            if normalise(number) not in known and number not in ALLOWED_UNANCHORED:
-                unanchored.append(f"README.md:{line_number}: {number}")
+    for rel, text in documents.items():
+        for line_number, line in enumerate(strip_code(text).splitlines(), start=1):
+            for number in re.findall(r"(?<![\w.-])\d[\d,]*(?:\.\d+)?(?![\w.])", line):
+                if normalise(number) not in known and number not in ALLOWED_UNANCHORED:
+                    unanchored.append(f"{rel}:{line_number}: {number}")
 
     for item in missing_docs:
         print(f"MISSING  {item}")
@@ -180,7 +181,7 @@ def main() -> int:
     print(
         f"checked {checked} anchored metrics across {len(documents)} documents: "
         f"{len(gaps)} gaps, {len(stale)} stale, {len(missing_docs)} missing documents, "
-        f"{len(unanchored)} unanchored README numbers"
+        f"{len(unanchored)} unanchored numbers"
     )
     return 1 if gaps or stale or missing_docs else 0
 

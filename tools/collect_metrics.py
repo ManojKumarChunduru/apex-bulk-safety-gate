@@ -163,10 +163,7 @@ def main() -> int:
         "triggers_breach": ["{} triggers breach at 200", "{} of them breach at 200"],
         "triggers_latent": ["{} breach only above 200"],
         "triggers_clean": ["{} clean within the horizon"],
-        "triggers_undecidable": [
-            "{} of {m:triggers_total} triggers undecidable",
-            "{} triggers undecidable",
-        ],
+        "triggers_undecidable": ["{} of {m:triggers_total} triggers undecidable"],
         "undecidable_pct": ["{}% of the fixture undecidable"],
         "breaches_total": ["{} breaches in all"],
         "breaches_at_200": ["{} breaches at or below 200"],
@@ -221,6 +218,21 @@ def main() -> int:
                 f"`{t.name}` | {t.sobject} | {{m:row_{key}_coverage}}% | "
                 f"{{m:row_{key}_tested}} | {{}} |"
             ]
+
+    # Per-finding cells of the resolution table: breach size and shortfall, pinned by the row.
+    labels = {
+        "soql_queries": "SOQL queries",
+        "sosl_queries": "SOSL queries",
+        "dml_statements": "DML statements",
+        "dml_rows": "DML rows",
+    }
+    for row in exp03["rows"]:
+        key = f"{row['trigger'].replace('Trigger', '').lower()}_{row['limit']}"
+        prefix = f"| `{row['trigger']}` | {labels[row['limit']]} | {row['tested_largest']} |"
+        metrics[f"find_{key}_breach"] = row["breach_at"]
+        anchors[f"find_{key}_breach"] = [f"{prefix} {{}} |"]
+        metrics[f"find_{key}_short"] = row["records_short"]
+        anchors[f"find_{key}_short"] = [f"{prefix} {{m:find_{key}_breach}} | {{}} |"]
 
     payload = {
         "metrics": metrics,

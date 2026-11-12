@@ -45,6 +45,48 @@
     "false_positive": [
       "{} false positives"
     ],
+    "find_accounttask_soql_queries_breach": [
+      "| `AccountTaskTrigger` | SOQL queries | 100 | {} |"
+    ],
+    "find_accounttask_soql_queries_short": [
+      "| `AccountTaskTrigger` | SOQL queries | 100 | {m:find_accounttask_soql_queries_breach} | {} |"
+    ],
+    "find_contactemail_dml_statements_breach": [
+      "| `ContactEmailTrigger` | DML statements | 1 | {} |"
+    ],
+    "find_contactemail_dml_statements_short": [
+      "| `ContactEmailTrigger` | DML statements | 1 | {m:find_contactemail_dml_statements_breach} | {} |"
+    ],
+    "find_contactemail_soql_queries_breach": [
+      "| `ContactEmailTrigger` | SOQL queries | 1 | {} |"
+    ],
+    "find_contactemail_soql_queries_short": [
+      "| `ContactEmailTrigger` | SOQL queries | 1 | {m:find_contactemail_soql_queries_breach} | {} |"
+    ],
+    "find_opportunitystage_soql_queries_breach": [
+      "| `OpportunityStageTrigger` | SOQL queries | 1 | {} |"
+    ],
+    "find_opportunitystage_soql_queries_short": [
+      "| `OpportunityStageTrigger` | SOQL queries | 1 | {m:find_opportunitystage_soql_queries_breach} | {} |"
+    ],
+    "find_orderlinerollup_soql_queries_breach": [
+      "| `OrderLineRollupTrigger` | SOQL queries | 50 | {} |"
+    ],
+    "find_orderlinerollup_soql_queries_short": [
+      "| `OrderLineRollupTrigger` | SOQL queries | 50 | {m:find_orderlinerollup_soql_queries_breach} | {} |"
+    ],
+    "find_ordertotal_soql_queries_breach": [
+      "| `OrderTotalTrigger` | SOQL queries | 1 | {} |"
+    ],
+    "find_ordertotal_soql_queries_short": [
+      "| `OrderTotalTrigger` | SOQL queries | 1 | {m:find_ordertotal_soql_queries_breach} | {} |"
+    ],
+    "find_taskassignment_soql_queries_breach": [
+      "| `TaskAssignmentTrigger` | SOQL queries | 1 | {} |"
+    ],
+    "find_taskassignment_soql_queries_short": [
+      "| `TaskAssignmentTrigger` | SOQL queries | 1 | {m:find_taskassignment_soql_queries_breach} | {} |"
+    ],
     "fully_covered_breaching": [
       "{} of {m:triggers_fully_covered} fully covered triggers breach"
     ],
@@ -214,8 +256,7 @@
       "{} triggers over"
     ],
     "triggers_undecidable": [
-      "{} of {m:triggers_total} triggers undecidable",
-      "{} triggers undecidable"
+      "{} of {m:triggers_total} triggers undecidable"
     ],
     "true_positive": [
       "{} true positives"
@@ -258,6 +299,20 @@
     "coverage_line_pct": 99.3,
     "false_negative": 0,
     "false_positive": 0,
+    "find_accounttask_soql_queries_breach": 101,
+    "find_accounttask_soql_queries_short": 1,
+    "find_contactemail_dml_statements_breach": 151,
+    "find_contactemail_dml_statements_short": 150,
+    "find_contactemail_soql_queries_breach": 101,
+    "find_contactemail_soql_queries_short": 100,
+    "find_opportunitystage_soql_queries_breach": 101,
+    "find_opportunitystage_soql_queries_short": 100,
+    "find_orderlinerollup_soql_queries_breach": 5001,
+    "find_orderlinerollup_soql_queries_short": 4951,
+    "find_ordertotal_soql_queries_breach": 6601,
+    "find_ordertotal_soql_queries_short": 6600,
+    "find_taskassignment_soql_queries_breach": 101,
+    "find_taskassignment_soql_queries_short": 100,
     "fully_covered_breaching": 4,
     "fully_covered_breaching_pct": 36.4,
     "fully_covered_undecidable": 2,
@@ -307,7 +362,7 @@
     "row_taskassignment_coverage": 100,
     "row_taskassignment_tested": 1,
     "smallest_breach_above_200": 5001,
-    "tests_total": 308,
+    "tests_total": 309,
     "triggers_breach": 4,
     "triggers_clean": 4,
     "triggers_fully_covered": 11,

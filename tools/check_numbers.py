@@ -39,8 +39,10 @@ ALLOWED_UNANCHORED = {
     "8",
     "9",
     "10",
-    "350",
-    "62.0",
+    "350",  # the About text limit
+    "62.0",  # the fixture's API version
+    "99",  # the "75 to 99%" coverage bucket label
+    "50,000",  # the query rows limit, excluded from the policy on purpose (ADR-005)
 }
 
 
@@ -84,10 +86,11 @@ def pattern(anchor: str, metrics: dict) -> re.Pattern:
 
 def strip_code(markdown: str) -> str:
     """Remove fenced blocks, inline code, URLs and HTML attribute values for the reverse scan."""
-    text = re.sub(r"```.*?```", " ", markdown, flags=re.DOTALL)
+    keep_lines = lambda m: "\n" * m.group(0).count("\n")  # noqa: E731
+    text = re.sub(r"```.*?```", keep_lines, markdown, flags=re.DOTALL)
     text = re.sub(r"`[^`]*`", " ", text)
     text = re.sub(r"https?://\S+", " ", text)
-    text = re.sub(r"<[^>]+>", " ", text)
+    text = re.sub(r"<[^>]+>", keep_lines, text, flags=re.DOTALL)
     text = re.sub(r"\]\([^)]*\)", " ", text)
     return text
 
@@ -161,7 +164,7 @@ def main() -> int:
     unanchored = []
     readme = documents.get("README.md", "")
     for line_number, line in enumerate(strip_code(readme).splitlines(), start=1):
-        for number in re.findall(r"(?<![\w.])\d[\d,]*(?:\.\d+)?(?![\w.])", line):
+        for number in re.findall(r"(?<![\w.-])\d[\d,]*(?:\.\d+)?(?![\w.])", line):
             if normalise(number) not in known and number not in ALLOWED_UNANCHORED:
                 unanchored.append(f"README.md:{line_number}: {number}")
 

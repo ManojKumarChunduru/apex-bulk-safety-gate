@@ -1,0 +1,105 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: "verify (python ${{ matrix.python }})"
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install the package with its dev extras
+        run: python -m pip install -e ".[dev]"
+      - name: Lint
+        run: |
+          python -m ruff check src tests experiments tools
+          python -m ruff format --check src tests experiments tools
+      - name: Tests
+        run: >
+          python -m pytest -q -p no:cacheprovider
+          --junitxml=reports/junit.xml
+          --cov=absg
+          --cov-report=json:reports/coverage.json
+          --cov-report=xml:reports/coverage.xml
+          --cov-report=term-missing
+      - name: "Coverage floor: 95% of lines"
+        run: |
+          python - <<'PY'
+          import xml.etree.ElementTree as ET
+          rate = float(ET.parse("reports/coverage.xml").getroot().get("line-rate"))
+          print(f"line coverage {rate:.1%}")
+          raise SystemExit(0 if rate >= 0.95 else f"line coverage {rate:.1%} is below the 95% floor")
+          PY
+      - name: Experiments, re-measured from scratch
+        run: |
+          python experiments/exp01_breach_census.py
+          python experiments/exp02_coverage_vs_bulk.py
+          python experiments/exp03_resolution.py
+          python experiments/exp04_undecidable.py
+      - name: "Receipts: every published figure matches the prose"
+        run: |
+          python tools/collect_metrics.py --skip-tests --skip-experiments
+          python tools/check_numbers.py
+      - name: "Experiment JSON must be byte-identical to the committed copy"
+        run: git diff --exit-code -- docs/experiments docs/metrics.json
+      - name: Upload the reports and experiment output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: "reports-${{ matrix.python }}"
+          path: |
+            reports/
+            docs/experiments/
+            docs/metrics.json
+      - name: Publish the awkward table to the job summary
+        run: |
+          python -m absg gate --project fixture --coverage fixture/coverage/test-result-codecoverage.json --markdown >> "$GITHUB_STEP_SUMMARY" || true
+          {
+            echo ""
+            echo "### Resolution: tested size against breach size"
+            echo ""
+            echo '```'
+            python experiments/exp03_resolution.py | sed -n '1,/^$/p'
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  gate:
+    name: "the gate as a PR check (expects exit 1 on the fixture: breaches found)"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install with no extras, the way a pipeline runner would
+        run: python -m pip install .
+      - name: "Run the gate on the fixture; exit 1 is the expected outcome"
+        run: |
+          set +e
+          absg gate --project fixture --coverage fixture/coverage/test-result-codecoverage.json
+          code=$?
+          set -e
+          echo "absg gate exited $code"
+          test "$code" -eq 1
+      - name: "Run the gate at a Bulk API batch; the latent breaches become breaches"
+        run: |
+          set +e
+          absg gate --project fixture --records 10000
+          code=$?
+          set -e
+          test "$code" -eq 1
+      - name: "Explain the closest miss"
+        run: absg explain AccountTaskTrigger --project fixture

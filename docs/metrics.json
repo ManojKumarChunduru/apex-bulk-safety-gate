@@ -1,0 +1,321 @@
+{
+  "anchors": {
+    "apex_bulk": [
+      "{} exercise 200 or more"
+    ],
+    "apex_single_record": [
+      "{} of {m:apex_test_methods} Apex test methods exercise one record"
+    ],
+    "apex_test_methods": [
+      "{} Apex test methods"
+    ],
+    "breaches_above_200": [
+      "{} breaches above 200"
+    ],
+    "breaches_at_200": [
+      "{} breaches at or below 200"
+    ],
+    "breaches_total": [
+      "{} breaches in all"
+    ],
+    "chain_breaches": [
+      "{} breaches through a chain"
+    ],
+    "chain_only_breaches": [
+      "{} exist only through the chain"
+    ],
+    "chunk_size": [
+      "chunks of {}"
+    ],
+    "closest_breach": [
+      "tested at {m:closest_tested} records and breaches at {}"
+    ],
+    "closest_short": [
+      "{} record short"
+    ],
+    "closest_tested": [
+      "tested at {} records and breaches at {m:closest_breach}"
+    ],
+    "coverage_line_pct": [
+      "{}% line coverage"
+    ],
+    "false_negative": [
+      "{} false negatives"
+    ],
+    "false_positive": [
+      "{} false positives"
+    ],
+    "fully_covered_breaching": [
+      "{} of {m:triggers_fully_covered} fully covered triggers breach"
+    ],
+    "fully_covered_breaching_pct": [
+      "{}% of the fully covered"
+    ],
+    "fully_covered_undecidable": [
+      "{} fully covered triggers undecidable"
+    ],
+    "horizon": [
+      "horizon of {} records"
+    ],
+    "largest_breach": [
+      "the larger at {} records"
+    ],
+    "largest_test_behind_breach": [
+      "exercise at most {} records"
+    ],
+    "largest_tested_any": [
+      "largest test anywhere exercises {} records"
+    ],
+    "limit_dml_rows": [
+      "{} DML rows"
+    ],
+    "limit_dml_statements": [
+      "{} DML statements"
+    ],
+    "limit_soql": [
+      "{} SOQL queries"
+    ],
+    "limit_soql_async": [
+      "{} for asynchronous"
+    ],
+    "limit_sosl": [
+      "{} SOSL queries"
+    ],
+    "objects_total": [
+      "over {} objects"
+    ],
+    "planted_breaches": [
+      "{} planted breaches",
+      "below one in {}"
+    ],
+    "records": [
+      "verdict at {} records"
+    ],
+    "refusal_reasons": [
+      "{} refusal reasons"
+    ],
+    "row_accountdedupe_coverage": [
+      "`AccountDedupeTrigger` | Account | {}% |"
+    ],
+    "row_accountdedupe_tested": [
+      "`AccountDedupeTrigger` | Account | {m:row_accountdedupe_coverage}% | {} |"
+    ],
+    "row_accountregion_coverage": [
+      "`AccountRegionTrigger` | Account | {}% |"
+    ],
+    "row_accountregion_tested": [
+      "`AccountRegionTrigger` | Account | {m:row_accountregion_coverage}% | {} |"
+    ],
+    "row_accounttask_breach": [
+      "`AccountTaskTrigger` | Account | {m:row_accounttask_coverage}% | {m:row_accounttask_tested} | {} |"
+    ],
+    "row_accounttask_coverage": [
+      "`AccountTaskTrigger` | Account | {}% |"
+    ],
+    "row_accounttask_tested": [
+      "`AccountTaskTrigger` | Account | {m:row_accounttask_coverage}% | {} |"
+    ],
+    "row_caseage_coverage": [
+      "`CaseAgeTrigger` | Case | {}% |"
+    ],
+    "row_caseage_tested": [
+      "`CaseAgeTrigger` | Case | {m:row_caseage_coverage}% | {} |"
+    ],
+    "row_caseescalation_coverage": [
+      "`CaseEscalationTrigger` | Case | {}% |"
+    ],
+    "row_caseescalation_tested": [
+      "`CaseEscalationTrigger` | Case | {m:row_caseescalation_coverage}% | {} |"
+    ],
+    "row_contactemail_breach": [
+      "`ContactEmailTrigger` | Contact | {m:row_contactemail_coverage}% | {m:row_contactemail_tested} | {} |"
+    ],
+    "row_contactemail_coverage": [
+      "`ContactEmailTrigger` | Contact | {}% |"
+    ],
+    "row_contactemail_tested": [
+      "`ContactEmailTrigger` | Contact | {m:row_contactemail_coverage}% | {} |"
+    ],
+    "row_contactphoneformat_coverage": [
+      "`ContactPhoneFormatTrigger` | Contact | {}% |"
+    ],
+    "row_contactphoneformat_tested": [
+      "`ContactPhoneFormatTrigger` | Contact | {m:row_contactphoneformat_coverage}% | {} |"
+    ],
+    "row_leadrouting_coverage": [
+      "`LeadRoutingTrigger` | Lead | {}% |"
+    ],
+    "row_leadrouting_tested": [
+      "`LeadRoutingTrigger` | Lead | {m:row_leadrouting_coverage}% | {} |"
+    ],
+    "row_opportunitystage_breach": [
+      "`OpportunityStageTrigger` | Opportunity | {m:row_opportunitystage_coverage}% | {m:row_opportunitystage_tested} | {} |"
+    ],
+    "row_opportunitystage_coverage": [
+      "`OpportunityStageTrigger` | Opportunity | {}% |"
+    ],
+    "row_opportunitystage_tested": [
+      "`OpportunityStageTrigger` | Opportunity | {m:row_opportunitystage_coverage}% | {} |"
+    ],
+    "row_opportunitysync_coverage": [
+      "`OpportunitySyncTrigger` | Opportunity | {}% |"
+    ],
+    "row_opportunitysync_tested": [
+      "`OpportunitySyncTrigger` | Opportunity | {m:row_opportunitysync_coverage}% | {} |"
+    ],
+    "row_orderlinerollup_breach": [
+      "`OrderLineRollupTrigger` | Order_Line__c | {m:row_orderlinerollup_coverage}% | {m:row_orderlinerollup_tested} | {} |"
+    ],
+    "row_orderlinerollup_coverage": [
+      "`OrderLineRollupTrigger` | Order_Line__c | {}% |"
+    ],
+    "row_orderlinerollup_tested": [
+      "`OrderLineRollupTrigger` | Order_Line__c | {m:row_orderlinerollup_coverage}% | {} |"
+    ],
+    "row_ordertotal_breach": [
+      "`OrderTotalTrigger` | Order__c | {m:row_ordertotal_coverage}% | {m:row_ordertotal_tested} | {} |"
+    ],
+    "row_ordertotal_coverage": [
+      "`OrderTotalTrigger` | Order__c | {}% |"
+    ],
+    "row_ordertotal_tested": [
+      "`OrderTotalTrigger` | Order__c | {m:row_ordertotal_coverage}% | {} |"
+    ],
+    "row_taskassignment_breach": [
+      "`TaskAssignmentTrigger` | Task | {m:row_taskassignment_coverage}% | {m:row_taskassignment_tested} | {} |"
+    ],
+    "row_taskassignment_coverage": [
+      "`TaskAssignmentTrigger` | Task | {}% |"
+    ],
+    "row_taskassignment_tested": [
+      "`TaskAssignmentTrigger` | Task | {m:row_taskassignment_coverage}% | {} |"
+    ],
+    "smallest_breach_above_200": [
+      "the smaller at {} records"
+    ],
+    "tests_total": [
+      "{} tests"
+    ],
+    "triggers_breach": [
+      "{} triggers breach at 200",
+      "{} of them breach at 200"
+    ],
+    "triggers_clean": [
+      "{} clean within the horizon"
+    ],
+    "triggers_fully_covered": [
+      "{} triggers at 100%"
+    ],
+    "triggers_latent": [
+      "{} breach only above 200"
+    ],
+    "triggers_total": [
+      "{} triggers in the fixture",
+      "{} triggers over"
+    ],
+    "triggers_undecidable": [
+      "{} of {m:triggers_total} triggers undecidable",
+      "{} triggers undecidable"
+    ],
+    "true_positive": [
+      "{} true positives"
+    ],
+    "undecidable_pct": [
+      "{}% of the fixture undecidable"
+    ]
+  },
+  "banner": {
+    "figures": {
+      "breaches_above_200": "{} more above 200",
+      "fully_covered_breaching": "{} of {m:triggers_fully_covered}",
+      "largest_test_behind_breach": "tests stop at {}",
+      "triggers_undecidable": "{} undecidable"
+    },
+    "path": "docs/assets/banner.svg"
+  },
+  "checked_documents": [
+    "README.md",
+    "fixture/README.md",
+    "docs/adr/ADR-001-count-provenance-not-line-coverage.md",
+    "docs/adr/ADR-002-purpose-built-extractor-with-a-refusal-set.md",
+    "docs/adr/ADR-003-breach-size-not-a-boolean.md",
+    "docs/adr/ADR-004-standard-library-and-a-limits-policy.md",
+    "docs/adr/ADR-005-what-a-committed-fixture-cannot-establish.md"
+  ],
+  "metrics": {
+    "apex_bulk": 2,
+    "apex_single_record": 8,
+    "apex_test_methods": 12,
+    "breaches_above_200": 2,
+    "breaches_at_200": 5,
+    "breaches_total": 7,
+    "chain_breaches": 3,
+    "chain_only_breaches": 2,
+    "chunk_size": 200,
+    "closest_breach": 101,
+    "closest_short": 1,
+    "closest_tested": 100,
+    "coverage_line_pct": 99.3,
+    "false_negative": 0,
+    "false_positive": 0,
+    "fully_covered_breaching": 4,
+    "fully_covered_breaching_pct": 36.4,
+    "fully_covered_undecidable": 2,
+    "horizon": 10000,
+    "largest_breach": 6601,
+    "largest_test_behind_breach": 100,
+    "largest_tested_any": 251,
+    "limit_dml_rows": 10000,
+    "limit_dml_statements": 150,
+    "limit_soql": 100,
+    "limit_soql_async": 200,
+    "limit_sosl": 20,
+    "objects_total": 8,
+    "planted_breaches": 7,
+    "records": 200,
+    "refusal_reasons": 3,
+    "row_accountdedupe_coverage": 100,
+    "row_accountdedupe_tested": 100,
+    "row_accountregion_coverage": 100,
+    "row_accountregion_tested": 1,
+    "row_accounttask_breach": 101,
+    "row_accounttask_coverage": 100,
+    "row_accounttask_tested": 100,
+    "row_caseage_coverage": 75,
+    "row_caseage_tested": 1,
+    "row_caseescalation_coverage": 100,
+    "row_caseescalation_tested": 200,
+    "row_contactemail_breach": 101,
+    "row_contactemail_coverage": 100,
+    "row_contactemail_tested": 1,
+    "row_contactphoneformat_coverage": 100,
+    "row_contactphoneformat_tested": 251,
+    "row_leadrouting_coverage": 100,
+    "row_leadrouting_tested": 1,
+    "row_opportunitystage_breach": 101,
+    "row_opportunitystage_coverage": 100,
+    "row_opportunitystage_tested": 1,
+    "row_opportunitysync_coverage": 100,
+    "row_opportunitysync_tested": 1,
+    "row_orderlinerollup_breach": 5001,
+    "row_orderlinerollup_coverage": 100,
+    "row_orderlinerollup_tested": 50,
+    "row_ordertotal_breach": 6601,
+    "row_ordertotal_coverage": 75,
+    "row_ordertotal_tested": 1,
+    "row_taskassignment_breach": 101,
+    "row_taskassignment_coverage": 100,
+    "row_taskassignment_tested": 1,
+    "smallest_breach_above_200": 5001,
+    "tests_total": 308,
+    "triggers_breach": 4,
+    "triggers_clean": 4,
+    "triggers_fully_covered": 11,
+    "triggers_latent": 2,
+    "triggers_total": 13,
+    "triggers_undecidable": 3,
+    "true_positive": 7,
+    "undecidable_pct": 23.1
+  },
+  "note": "every value here is produced by running the suite, the experiments and the gate"
+}

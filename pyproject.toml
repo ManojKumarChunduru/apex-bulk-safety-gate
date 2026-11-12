@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "apex-bulk-safety-gate"
+version = "0.1.0"
+description = "Computes the record count at which every trigger in an SFDX project breaches a governor limit, which line coverage cannot show."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Manoj Kumar Chunduru", email = "hello.manojchunduru@gmail.com" }]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-cov>=5", "coverage>=7", "ruff>=0.5"]
+evidence = ["playwright>=1.45", "cmarkgfm>=2024.1"]
+
+[project.scripts]
+absg = "absg.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests", "experiments", "tools"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.coverage.run]
+source = ["absg"]
+branch = false
+
+[tool.coverage.report]
+show_missing = true
+precision = 1

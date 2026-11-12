@@ -1,0 +1,9 @@
+# Keep the Salesforce source visible in the language bar instead of letting the repo read as 100% Python.
+*.cls linguist-detectable=true linguist-language=Apex
+*.trigger linguist-detectable=true linguist-language=Apex
+*.apex linguist-detectable=true linguist-language=Apex
+*-meta.xml linguist-detectable=true linguist-language=XML
+*.csv linguist-detectable=true
+fixture/**/*.json linguist-detectable=true linguist-language=JSON
+docs/**/*.svg linguist-generated=true
+docs/experiments/*.json linguist-generated=true

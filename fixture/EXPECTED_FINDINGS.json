@@ -1,0 +1,123 @@
+{
+  "note": "Planted ground truth for the fixture, written from the source before the gate ran. A test asserts the gate's report equals this exactly; exp04 reports precision and recall against it with the resolution floor stated. Breach sizes assume synchronous limits (100 SOQL, 20 SOSL, 150 DML statements, 10,000 DML rows), chunks of 200 sharing one transaction, and a horizon of 10,000 records.",
+  "records": 200,
+  "triggers": {
+    "AccountDedupeTrigger": {
+      "status": "clean",
+      "carrier": "force-app/main/default/triggers/AccountDedupeTrigger.trigger",
+      "why": "one query per invocation; the 101st invocation is the 20,001st record, beyond the horizon",
+      "findings": [],
+      "refusals": [],
+      "tested_largest": 100
+    },
+    "AccountTaskTrigger": {
+      "status": "breach",
+      "carrier": "force-app/main/default/classes/AccountTaskHandler.cls",
+      "why": "one insert statement for the batch; TaskAssignmentTrigger behind it costs one query per task",
+      "findings": [
+        {"limit": "soql_queries", "breach_at": 101, "via_chain": true}
+      ],
+      "refusals": [],
+      "tested_largest": 100
+    },
+    "TaskAssignmentTrigger": {
+      "status": "breach",
+      "carrier": "force-app/main/default/triggers/TaskAssignmentTrigger.trigger",
+      "why": "a query inside the loop over Trigger.new",
+      "findings": [
+        {"limit": "soql_queries", "breach_at": 101, "via_chain": false}
+      ],
+      "refusals": [],
+      "tested_largest": 1
+    },
+    "ContactEmailTrigger": {
+      "status": "breach",
+      "carrier": "force-app/main/default/triggers/ContactEmailTrigger.trigger",
+      "why": "an insert per record (151st record) and each insert invokes CaseEscalationTrigger's one query (101st record)",
+      "findings": [
+        {"limit": "soql_queries", "breach_at": 101, "via_chain": true},
+        {"limit": "dml_statements", "breach_at": 151, "via_chain": false}
+      ],
+      "refusals": [],
+      "tested_largest": 1
+    },
+    "CaseEscalationTrigger": {
+      "status": "clean",
+      "carrier": "force-app/main/default/triggers/CaseEscalationTrigger.trigger",
+      "why": "one query per invocation",
+      "findings": [],
+      "refusals": [],
+      "tested_largest": 200
+    },
+    "OpportunityStageTrigger": {
+      "status": "breach",
+      "carrier": "force-app/main/default/classes/OpportunityStageHandler.cls",
+      "why": "the child query sits inside the loop over the batch",
+      "findings": [
+        {"limit": "soql_queries", "breach_at": 101, "via_chain": false}
+      ],
+      "refusals": [],
+      "tested_largest": 1
+    },
+    "OrderTotalTrigger": {
+      "status": "latent",
+      "carrier": "force-app/main/default/triggers/OrderTotalTrigger.trigger",
+      "why": "three queries per invocation from a loop over three constant statuses; 34 chunks exceed 100 queries, so the 6,601st record",
+      "findings": [
+        {"limit": "soql_queries", "breach_at": 6601, "via_chain": false}
+      ],
+      "refusals": [],
+      "tested_largest": 1
+    },
+    "OrderLineRollupTrigger": {
+      "status": "latent",
+      "carrier": "force-app/main/default/classes/OrderLineRollupHandler.cls",
+      "why": "one query of its own plus three through OrderTotalTrigger: four per invocation, 26 chunks exceed 100, so the 5,001st record",
+      "findings": [
+        {"limit": "soql_queries", "breach_at": 5001, "via_chain": true}
+      ],
+      "refusals": [],
+      "tested_largest": 50
+    },
+    "LeadRoutingTrigger": {
+      "status": "undecidable",
+      "carrier": "force-app/main/default/triggers/LeadRoutingTrigger.trigger",
+      "why": "the handler is resolved with Type.forName; LeadRouter behind it costs a query per lead the gate cannot see",
+      "findings": [],
+      "refusals": ["dynamic_dispatch"],
+      "tested_largest": 1
+    },
+    "OpportunitySyncTrigger": {
+      "status": "undecidable",
+      "carrier": "force-app/main/default/triggers/OpportunitySyncTrigger.trigger",
+      "why": "erp.SyncHandler is in a managed package whose source is not in the project",
+      "findings": [],
+      "refusals": ["external_namespace"],
+      "tested_largest": 1
+    },
+    "AccountRegionTrigger": {
+      "status": "clean",
+      "carrier": "force-app/main/default/triggers/AccountRegionTrigger.trigger",
+      "why": "updates its own object behind a static guard; one statement per invocation and r rows, both beyond the horizon",
+      "findings": [],
+      "refusals": [],
+      "tested_largest": 1
+    },
+    "ContactPhoneFormatTrigger": {
+      "status": "clean",
+      "carrier": "force-app/main/default/triggers/ContactPhoneFormatTrigger.trigger",
+      "why": "no query and no DML",
+      "findings": [],
+      "refusals": [],
+      "tested_largest": 251
+    },
+    "CaseAgeTrigger": {
+      "status": "undecidable",
+      "carrier": "force-app/main/default/triggers/CaseAgeTrigger.trigger",
+      "why": "updates its own object with no static guard, so the chain returns to itself",
+      "findings": [],
+      "refusals": ["reentrant"],
+      "tested_largest": 1
+    }
+  }
+}

@@ -1,0 +1,272 @@
+[
+  {
+    "id": "01p000000000000",
+    "name": "no-map/AccountDedupeTrigger",
+    "totalLines": 9,
+    "lines": {
+      "3": 1,
+      "4": 1,
+      "5": 1,
+      "7": 1,
+      "8": 1,
+      "9": 1,
+      "11": 1,
+      "12": 1,
+      "13": 1
+    },
+    "totalCovered": 9,
+    "coveredPercent": 100.0
+  },
+  {
+    "id": "01p000000000001",
+    "name": "no-map/AccountTaskTrigger",
+    "totalLines": 1,
+    "lines": {
+      "3": 1
+    },
+    "totalCovered": 1,
+    "coveredPercent": 100.0
+  },
+  {
+    "id": "01p000000000002",
+    "name": "no-map/TaskAssignmentTrigger",
+    "totalLines": 4,
+    "lines": {
+      "3": 1,
+      "4": 1,
+      "5": 1,
+      "6": 1
+    },
+    "totalCovered": 4,
+    "coveredPercent": 100.0
+  },
+  {
+    "id": "01p000000000003",
+    "name": "no-map/ContactEmailTrigger",
+    "totalLines": 4,
+    "lines": {
+      "3": 1,
+      "4": 1,
+      "5": 1,
+      "6": 1
+    },
+    "totalCovered": 4,
+    "coveredPercent": 100.0
+  },
+  {
+    "id": "01p000000000004",
+    "name": "no-map/CaseEscalationTrigger",
+    "totalLines": 10,
+    "lines": {
+      "3": 1,
+      "4": 1,
+      "5": 1,
+      "6": 1,
+      "9": 1,
+      "10": 1,
+      "12": 1,
+      "13": 1,
+      "14": 1,
+      "15": 1
+    },
+    "totalCovered": 10,
+    "coveredPercent": 100.0
+  },
+  {
+    "id": "01p000000000005",
+    "name": "no-map/OpportunityStageTrigger",
+    "totalLines": 1,
+    "lines": {
+      "2": 1
+    },
+    "totalCovered": 1,
+    "coveredPercent": 100.0
+  },
+  {
+    "id": "01p000000000006",
+    "name": "no-map/OrderTotalTrigger",
+    "totalLines": 8,
+    "lines": {
+      "4": 1,
+      "5": 1,
+      "6": 1,
+      "7": 1,
+      "8": 1,
+      "9": 1,
+      "10": 0,
+      "11": 0
+    },
+    "totalCovered": 6,
+    "coveredPercent": 75.0
+  },
+  {
+    "id": "01p000000000007",
+    "name": "no-map/OrderLineRollupTrigger",
+    "totalLines": 1,
+    "lines": {
+      "2": 1
+    },
+    "totalCovered": 1,
+    "coveredPercent": 100.0
+  },
+  {
+    "id": "01p000000000008",
+    "name": "no-map/LeadRoutingTrigger",
+    "totalLines": 4,
+    "lines": {
+      "4": 1,
+      "5": 1,
+      "6": 1,
+      "7": 1
+    },
+    "totalCovered": 4,
+    "coveredPercent": 100.0
+  },
+  {
+    "id": "01p000000000009",
+    "name": "no-map/OpportunitySyncTrigger",
+    "totalLines": 1,
+    "lines": {
+      "3": 1
+    },
+    "totalCovered": 1,
+    "coveredPercent": 100.0
+  },
+  {
+    "id": "01p000000000010",
+    "name": "no-map/AccountRegionTrigger",
+    "totalLines": 6,
+    "lines": {
+      "4": 1,
+      "5": 1,
+      "6": 1,
+      "7": 1,
+      "8": 1,
+      "10": 1
+    },
+    "totalCovered": 6,
+    "coveredPercent": 100.0
+  },
+  {
+    "id": "01p000000000011",
+    "name": "no-map/ContactPhoneFormatTrigger",
+    "totalLines": 3,
+    "lines": {
+      "3": 1,
+      "4": 1,
+      "5": 1
+    },
+    "totalCovered": 3,
+    "coveredPercent": 100.0
+  },
+  {
+    "id": "01p000000000012",
+    "name": "no-map/CaseAgeTrigger",
+    "totalLines": 4,
+    "lines": {
+      "4": 1,
+      "5": 1,
+      "6": 1,
+      "8": 0
+    },
+    "totalCovered": 3,
+    "coveredPercent": 75.0
+  },
+  {
+    "id": "01p000000000013",
+    "name": "no-map/AccountTaskHandler",
+    "totalLines": 9,
+    "lines": {
+      "5": 1,
+      "6": 1,
+      "7": 1,
+      "8": 1,
+      "9": 1,
+      "10": 1,
+      "11": 1,
+      "12": 1,
+      "14": 1
+    },
+    "totalCovered": 9,
+    "coveredPercent": 100.0
+  },
+  {
+    "id": "01p000000000014",
+    "name": "no-map/OpportunityStageHandler",
+    "totalLines": 9,
+    "lines": {
+      "5": 1,
+      "6": 1,
+      "7": 1,
+      "8": 1,
+      "10": 1,
+      "11": 1,
+      "12": 1,
+      "14": 1,
+      "16": 1
+    },
+    "totalCovered": 9,
+    "coveredPercent": 100.0
+  },
+  {
+    "id": "01p000000000015",
+    "name": "no-map/StageHistoryWriter",
+    "totalLines": 1,
+    "lines": {
+      "5": 1
+    },
+    "totalCovered": 1,
+    "coveredPercent": 100.0
+  },
+  {
+    "id": "01p000000000016",
+    "name": "no-map/OrderLineRollupHandler",
+    "totalLines": 12,
+    "lines": {
+      "5": 1,
+      "6": 1,
+      "7": 1,
+      "9": 1,
+      "10": 1,
+      "11": 1,
+      "12": 1,
+      "14": 1,
+      "16": 1,
+      "17": 1,
+      "18": 1,
+      "20": 1
+    },
+    "totalCovered": 12,
+    "coveredPercent": 100.0
+  },
+  {
+    "id": "01p000000000017",
+    "name": "no-map/RegionLookup",
+    "totalLines": 6,
+    "lines": {
+      "4": 1,
+      "5": 1,
+      "7": 1,
+      "8": 1,
+      "10": 1,
+      "11": 0
+    },
+    "totalCovered": 5,
+    "coveredPercent": 83.33
+  },
+  {
+    "id": "01p000000000018",
+    "name": "no-map/LeadRouter",
+    "totalLines": 6,
+    "lines": {
+      "5": 1,
+      "6": 1,
+      "7": 1,
+      "8": 1,
+      "9": 1,
+      "10": 1
+    },
+    "totalCovered": 6,
+    "coveredPercent": 100.0
+  }
+]
